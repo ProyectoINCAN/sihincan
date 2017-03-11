@@ -4,91 +4,91 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
-class EtniasController {
+class EtniaController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Etnias.list(params), model:[etniasCount: Etnias.count()]
+        respond Etnia.list(params), model:[etniaCount: Etnia.count()]
     }
 
-    def show(Etnias etnias) {
-        respond etnias
+    def show(Etnia etnia) {
+        respond etnia
     }
 
     def create() {
-        respond new Etnias(params)
+        respond new Etnia(params)
     }
 
     @Transactional
-    def save(Etnias etnias) {
-        if (etnias == null) {
+    def save(Etnia etnia) {
+        if (etnia == null) {
             transactionStatus.setRollbackOnly()
             notFound()
             return
         }
 
-        if (etnias.hasErrors()) {
+        if (etnia.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond etnias.errors, view:'create'
+            respond etnia.errors, view:'create'
             return
         }
 
-        etnias.save flush:true
+        etnia.save flush:true
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'etnias.label', default: 'Etnias'), etnias.id])
-                redirect etnias
+                flash.message = message(code: 'default.created.message', args: [message(code: 'etnia.label', default: 'Etnia'), etnia.id])
+                redirect etnia
             }
-            '*' { respond etnias, [status: CREATED] }
+            '*' { respond etnia, [status: CREATED] }
         }
     }
 
-    def edit(Etnias etnias) {
-        respond etnias
+    def edit(Etnia etnia) {
+        respond etnia
     }
 
     @Transactional
-    def update(Etnias etnias) {
-        if (etnias == null) {
+    def update(Etnia etnia) {
+        if (etnia == null) {
             transactionStatus.setRollbackOnly()
             notFound()
             return
         }
 
-        if (etnias.hasErrors()) {
+        if (etnia.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond etnias.errors, view:'edit'
+            respond etnia.errors, view:'edit'
             return
         }
 
-        etnias.save flush:true
+        etnia.save flush:true
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'etnias.label', default: 'Etnias'), etnias.id])
-                redirect etnias
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'etnia.label', default: 'Etnia'), etnia.id])
+                redirect etnia
             }
-            '*'{ respond etnias, [status: OK] }
+            '*'{ respond etnia, [status: OK] }
         }
     }
 
     @Transactional
-    def delete(Etnias etnias) {
+    def delete(Etnia etnia) {
 
-        if (etnias == null) {
+        if (etnia == null) {
             transactionStatus.setRollbackOnly()
             notFound()
             return
         }
 
-        etnias.delete flush:true
+        etnia.delete flush:true
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'etnias.label', default: 'Etnias'), etnias.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'etnia.label', default: 'Etnia'), etnia.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
@@ -98,7 +98,7 @@ class EtniasController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'etnias.label', default: 'Etnias'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'etnia.label', default: 'Etnia'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }

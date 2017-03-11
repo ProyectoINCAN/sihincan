@@ -3,9 +3,9 @@ package pacientes
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(EtniasController)
-@Mock(Etnias)
-class EtniasControllerSpec extends Specification {
+@TestFor(TelefonoController)
+@Mock(Telefono)
+class TelefonoControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
@@ -21,8 +21,8 @@ class EtniasControllerSpec extends Specification {
             controller.index()
 
         then:"The model is correct"
-            !model.etniasList
-            model.etniasCount == 0
+            !model.telefonoList
+            model.telefonoCount == 0
     }
 
     void "Test the create action returns the correct model"() {
@@ -30,7 +30,7 @@ class EtniasControllerSpec extends Specification {
             controller.create()
 
         then:"The model is correctly created"
-            model.etnias!= null
+            model.telefono!= null
     }
 
     void "Test the save action correctly persists an instance"() {
@@ -38,25 +38,25 @@ class EtniasControllerSpec extends Specification {
         when:"The save action is executed with an invalid instance"
             request.contentType = FORM_CONTENT_TYPE
             request.method = 'POST'
-            def etnias = new Etnias()
-            etnias.validate()
-            controller.save(etnias)
+            def telefono = new Telefono()
+            telefono.validate()
+            controller.save(telefono)
 
         then:"The create view is rendered again with the correct model"
-            model.etnias!= null
+            model.telefono!= null
             view == 'create'
 
         when:"The save action is executed with a valid instance"
             response.reset()
             populateValidParams(params)
-            etnias = new Etnias(params)
+            telefono = new Telefono(params)
 
-            controller.save(etnias)
+            controller.save(telefono)
 
         then:"A redirect is issued to the show action"
-            response.redirectedUrl == '/etnias/show/1'
+            response.redirectedUrl == '/telefono/show/1'
             controller.flash.message != null
-            Etnias.count() == 1
+            Telefono.count() == 1
     }
 
     void "Test that the show action returns the correct model"() {
@@ -68,11 +68,11 @@ class EtniasControllerSpec extends Specification {
 
         when:"A domain instance is passed to the show action"
             populateValidParams(params)
-            def etnias = new Etnias(params)
-            controller.show(etnias)
+            def telefono = new Telefono(params)
+            controller.show(telefono)
 
         then:"A model is populated containing the domain instance"
-            model.etnias == etnias
+            model.telefono == telefono
     }
 
     void "Test that the edit action returns the correct model"() {
@@ -84,11 +84,11 @@ class EtniasControllerSpec extends Specification {
 
         when:"A domain instance is passed to the edit action"
             populateValidParams(params)
-            def etnias = new Etnias(params)
-            controller.edit(etnias)
+            def telefono = new Telefono(params)
+            controller.edit(telefono)
 
         then:"A model is populated containing the domain instance"
-            model.etnias == etnias
+            model.telefono == telefono
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
@@ -98,28 +98,28 @@ class EtniasControllerSpec extends Specification {
             controller.update(null)
 
         then:"A 404 error is returned"
-            response.redirectedUrl == '/etnias/index'
+            response.redirectedUrl == '/telefono/index'
             flash.message != null
 
         when:"An invalid domain instance is passed to the update action"
             response.reset()
-            def etnias = new Etnias()
-            etnias.validate()
-            controller.update(etnias)
+            def telefono = new Telefono()
+            telefono.validate()
+            controller.update(telefono)
 
         then:"The edit view is rendered again with the invalid instance"
             view == 'edit'
-            model.etnias == etnias
+            model.telefono == telefono
 
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            etnias = new Etnias(params).save(flush: true)
-            controller.update(etnias)
+            telefono = new Telefono(params).save(flush: true)
+            controller.update(telefono)
 
         then:"A redirect is issued to the show action"
-            etnias != null
-            response.redirectedUrl == "/etnias/show/$etnias.id"
+            telefono != null
+            response.redirectedUrl == "/telefono/show/$telefono.id"
             flash.message != null
     }
 
@@ -130,23 +130,23 @@ class EtniasControllerSpec extends Specification {
             controller.delete(null)
 
         then:"A 404 is returned"
-            response.redirectedUrl == '/etnias/index'
+            response.redirectedUrl == '/telefono/index'
             flash.message != null
 
         when:"A domain instance is created"
             response.reset()
             populateValidParams(params)
-            def etnias = new Etnias(params).save(flush: true)
+            def telefono = new Telefono(params).save(flush: true)
 
         then:"It exists"
-            Etnias.count() == 1
+            Telefono.count() == 1
 
         when:"The domain instance is passed to the delete action"
-            controller.delete(etnias)
+            controller.delete(telefono)
 
         then:"The instance is deleted"
-            Etnias.count() == 0
-            response.redirectedUrl == '/etnias/index'
+            Telefono.count() == 0
+            response.redirectedUrl == '/telefono/index'
             flash.message != null
     }
 }
