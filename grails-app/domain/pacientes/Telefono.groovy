@@ -2,7 +2,6 @@ package pacientes
 
 class Telefono {
 
-    String id
     String numero
     Boolean habilitado = true
 

@@ -2,7 +2,6 @@ package pacientes
 
 class Etnia {
 
-    String id
     String nombre
     Boolean habilitado = true
 

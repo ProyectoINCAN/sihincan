@@ -1,8 +1,6 @@
 package pacientes
 
 class Profesion {
-
-    String id
     String nombre
     Boolean habilitado = true
 

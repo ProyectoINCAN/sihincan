@@ -93,13 +93,13 @@ dataSource:
     jmxExport: true
     driverClassName: "org.postgresql.Driver"
     username: "postgres"
-    password: "49768812093"
+    password: ""
     #dialect = org.hibernate.dialect.PostgreSQLDialect
 
 environments:
     development:
         dataSource:
-            dbCreate: create-drop
+            dbCreate: create-drop #update para que no elimine las tablas
             url: "jdbc:postgresql://localhost:5432/sihincan_db"
     test:
         dataSource:

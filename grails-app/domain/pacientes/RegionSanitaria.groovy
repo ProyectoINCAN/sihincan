@@ -2,7 +2,6 @@ package pacientes
 
 class RegionSanitaria {
 
-    String id
     String nombre
     Boolean habilitado = true
 
